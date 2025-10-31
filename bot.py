@@ -6,6 +6,7 @@ from telegram.ext import (
     Updater, CommandHandler, MessageHandler, Filters,
     CallbackQueryHandler, ConversationHandler, CallbackContext
 )
+import imghdr
 import sqlite3
 import logging
 from datetime import datetime
@@ -295,4 +296,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
