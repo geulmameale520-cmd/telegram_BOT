@@ -7,6 +7,7 @@ from telegram.ext import (
     CallbackQueryHandler, ConversationHandler, CallbackContext
 )
 import imghdr 
+from PIL import Image
 import io
 import sqlite3
 import logging
@@ -314,5 +315,6 @@ def main():
 
 if __name__ == '__main__':
     main()   
+
 
 
