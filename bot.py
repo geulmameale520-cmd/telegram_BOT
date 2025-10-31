@@ -105,7 +105,6 @@ def start(update: Update, context: CallbackContext):
         reply_markup=reply)
     return CHOOSING
 
-> ALA-EDDINE GUELMAME:
 def info_handler(update: Update, context: CallbackContext):
     update.message.reply_text(
         'هذا المشروع يهدف إلى تدريب الشباب في مجالي التسويق وصنع المنتجات الرقمية.\n'
@@ -208,7 +207,6 @@ def admin_callback(update: Update, context: CallbackContext):
         context.bot.send_message(chat_id=user_id,
                                  text='✅ تم قبول إثبات الدفع بنجاح!\nالرجاء الآن إدخال البريد الإلكتروني الذي تستخدمه في Gumroad (في رسالة واحدة).')
 
-> ALA-EDDINE GUELMAME:
 # احفظ id الدفع في حالة المشرف بالـ context حتى نعرف من سيرسل الايميل لاحقًا
         context.user_data['last_verified_payment'] = pid
         # أيضاً نحتاج لتتبع أن المستخدم يرد على طلب الايميل
@@ -306,3 +304,4 @@ def main():
 
 if name == 'main':
     main()
+
