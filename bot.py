@@ -1,4 +1,4 @@
-from telegram import (
+     from telegram import (
     Bot, Update, ReplyKeyboardMarkup, KeyboardButton,
     InlineKeyboardMarkup, InlineKeyboardButton
 )
@@ -6,7 +6,8 @@ from telegram.ext import (
     Updater, CommandHandler, MessageHandler, Filters,
     CallbackQueryHandler, ConversationHandler, CallbackContext
 )
-import imghdr
+from PIL import Image  # بديل imghdr
+import io
 import sqlite3
 import logging
 from datetime import datetime
@@ -96,6 +97,15 @@ def get_payment(payment_id):
     conn.close()
     return row
 
+# ------------------ Image Type Helper ------------------
+
+def get_image_format(file_bytes):
+    try:
+        img = Image.open(io.BytesIO(file_bytes))
+        return img.format  # مثال: 'JPEG', 'PNG'
+    except Exception:
+        return None
+
 # ------------------ Bot Handlers ------------------
 
 def start(update: Update, context: CallbackContext):
@@ -154,6 +164,14 @@ def received_photo(update: Update, context: CallbackContext):
     file_id = photo.file_id
     book = context.user_data.get('chosen_book', 'marketing')
     now = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+
+    # خيار: تحقق من نوع الصورة إذا أردت (غير ضروري غالباً)
+    # file = context.bot.get_file(file_id)
+    # file_bytes = file.download_as_bytearray()
+    # img_type = get_image_format(file_bytes)
+    # if img_type not in ['JPEG', 'PNG']:
+    #     update.message.reply_text('الملف المرسل ليس صورة صالحة. يرجى إرسال صورة بإمتداد JPEG أو PNG.')
+    #     return WAITING_RECEIPT
 
     payment_id = add_payment(user.id, user.username or '', user.full_name or '',
                              book, now, 'قيد المراجعة', file_id)
@@ -295,6 +313,4 @@ def main():
     updater.idle()
 
 if __name__ == '__main__':
-    main()
-
-
+    main()   
