@@ -3,7 +3,10 @@ import sqlite3
 from datetime import datetime
 import io
 import re
+import telebot  # استيراد المكتبة
 
+bot = telebot.TeleBot("8118917119:AAEH57njy93GeGEQhochhIeqxZBhv5BjZ3k")  # تعريف البوت
+    
 from telegram import (
     Update, ReplyKeyboardMarkup, KeyboardButton,
     InlineKeyboardMarkup, InlineKeyboardButton
@@ -309,4 +312,5 @@ if __name__ == '__main__':
     print("Bot is running...")
     bot.infinity_polling(skip_pending=True)
     main()
+
 
