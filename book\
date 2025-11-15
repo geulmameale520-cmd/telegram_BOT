@@ -1,6 +1,0 @@
-# إنشاء مجلد books
-mkdir books
-
-# نقل الملفين إلى المجلد الجديد
-mv marketing.pdf books/
-mv product.pdf books/
