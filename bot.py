@@ -474,6 +474,11 @@ async def main_async():
 
 if __name__ == '__main__':
     try:
+        # هذا الحل يعمل بشكل أفضل مع Render
         asyncio.run(main_async())
-    except (KeyboardInterrupt, SystemExit):
+    except KeyboardInterrupt:
         logger.info('Bot stopped by user')
+    except Exception as e:
+        logger.error(f'Bot crashed: {e}')
+        sys.exit(1)
+
