@@ -1,6 +1,6 @@
 
 
-import os import logging import re from datetime import datetime import aiosqlite import asyncio from pathlib import Path
+import os;import logging import re from datetime import datetime import aiosqlite import asyncio from pathlib import Path
 
 from telegram import ( Update, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, InputFile ) from telegram.ext import ( Application, CommandHandler, MessageHandler, filters, CallbackQueryHandler, ContextTypes ) from PIL import Image import io
 
@@ -344,6 +344,7 @@ logger.info('Bot started...')
 await application.run_polling()
 
 if name == 'main': try: asyncio.run(main_async()) except (KeyboardInterrupt, SystemExit): logger.info('Bot stopped by user')
+
 
 
 
