@@ -454,6 +454,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE):
 # ------------------ Main ------------------
 # ------------------ Main ------------------
 # ------------------ Main ------------------
+# ------------------ Main ------------------
 
 async def main_async():
     if not BOT_TOKEN:
@@ -472,11 +473,31 @@ async def main_async():
 
     logger.info('Bot started...')
     
-    # التشغيل بدون تعقيد
-    await application.run_polling()
+    try:
+        # الطريقة القديمة الموثوقة
+        await application.initialize()
+        await application.start()
+        await application.updater.start_polling()
+        
+        # انتظار إلى الأبد
+        while True:
+            await asyncio.sleep(3600)  # انتظار ساعة ثم كرر
+            
+    except KeyboardInterrupt:
+        logger.info("Bot stopped by user")
+    finally:
+        await application.updater.stop()
+        await application.stop()
+        await application.shutdown()
 
 if __name__ == '__main__':
-    # مجرد تشغيل - Render يتعامل مع الباقي
-    asyncio.run(main_async())
-
+    # تجنب استخدام asyncio.run لمشاكل Render
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    try:
+        loop.run_until_complete(main_async())
+    except KeyboardInterrupt:
+        logger.info("Bot stopped gracefully")
+    finally:
+        loop.close()
 
