@@ -453,6 +453,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE):
 
 # ------------------ Main ------------------
 # ------------------ Main ------------------
+# ------------------ Main ------------------
 
 async def main_async():
     if not BOT_TOKEN:
@@ -470,9 +471,12 @@ async def main_async():
     application.add_error_handler(error_handler)
 
     logger.info('Bot started...')
+    
+    # التشغيل بدون تعقيد
     await application.run_polling()
 
 if __name__ == '__main__':
-    # أبسط حل لـ Render
+    # مجرد تشغيل - Render يتعامل مع الباقي
     asyncio.run(main_async())
+
 
