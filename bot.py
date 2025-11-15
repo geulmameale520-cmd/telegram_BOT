@@ -452,6 +452,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE):
         pass
 
 # ------------------ Main ------------------
+# ------------------ Main ------------------
 
 async def main_async():
     if not BOT_TOKEN:
@@ -463,7 +464,6 @@ async def main_async():
     application = Application.builder().token(BOT_TOKEN).build()
 
     application.add_handler(CommandHandler('start', start))
-    # Accept photos and documents (PDF)
     application.add_handler(MessageHandler((filters.PHOTO | filters.Document.PDF) & filters.ChatType.PRIVATE, received_photo_or_doc))
     application.add_handler(MessageHandler(filters.TEXT & filters.ChatType.PRIVATE, handle_text))
     application.add_handler(CallbackQueryHandler(admin_callback))
@@ -473,12 +473,6 @@ async def main_async():
     await application.run_polling()
 
 if __name__ == '__main__':
-    try:
-        # هذا الحل يعمل بشكل أفضل مع Render
-        asyncio.run(main_async())
-    except KeyboardInterrupt:
-        logger.info('Bot stopped by user')
-    except Exception as e:
-        logger.error(f'Bot crashed: {e}')
-        sys.exit(1)
+    # أبسط حل لـ Render
+    asyncio.run(main_async())
 
