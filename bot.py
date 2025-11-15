@@ -1,8 +1,14 @@
-
-
-import os;import logging import re from datetime import datetime import aiosqlite import asyncio from pathlib import Path
-
-from telegram import ( Update, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, InputFile ) from telegram.ext import ( Application, CommandHandler, MessageHandler, filters, CallbackQueryHandler, ContextTypes ) from PIL import Image import io
+import os
+import logging 
+import re 
+from datetime import datetime 
+import aiosqlite 
+import asyncio 
+from pathlib import Path
+from telegram import ( Update, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, InputFile ) 
+from telegram.ext import ( Application, CommandHandler, MessageHandler, filters, CallbackQueryHandler, ContextTypes ) 
+from PIL import Image 
+import io
 
 --------------- Configuration ----------------
 
@@ -343,7 +349,8 @@ application.add_error_handler(error_handler)
 logger.info('Bot started...')
 await application.run_polling()
 
-if name == 'main': try: asyncio.run(main_async()) except (KeyboardInterrupt, SystemExit): logger.info('Bot stopped by user')
+if __name__ == '__main__': try: asyncio.run(main_async()) except (KeyboardInterrupt, SystemExit): logger.info('Bot stopped by user')
+
 
 
 
